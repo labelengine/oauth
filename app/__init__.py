@@ -2,6 +2,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 
@@ -17,6 +18,9 @@ DB_NAME = 'identities'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
 db = SQLAlchemy(app)
+
+# It is a Flask extension that provides bcrypt hashing utilities for application.
+bcrypt = Bcrypt(app)
 
 # Flask-Migrate is an extension that handles SQLAlchemy database migrations for Flask applications using Alembic.
 # The database operations are made available through the Flask command-line interface
