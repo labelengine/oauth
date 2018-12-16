@@ -12,10 +12,13 @@ def register_user(username: str, email: str, password):
     if not password:
         return error_message("Missing password parameter")
 
+    if User.query.filter_by(username=username).first():
+        return error_message("User name already exist", 409)
+
     new_user = User(username=username, email=email, password=password)
     db.session.add(new_user)
     db.session.commit()
 
     # Identity can be any data that is json serializable
     access_token = create_access_token(identity=username)
-    return json_response({'access_token': access_token})
+    return json_response({'access_token': access_token}, 201)
