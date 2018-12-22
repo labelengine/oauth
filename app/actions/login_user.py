@@ -11,10 +11,8 @@ def login_user(username: str, password: str):
         return error_message("Missing password parameter")
 
     user = User.query.filter_by(username=username).first()
-    if not user:
-        return error_message("User name not found", 401)
-    if not bcrypt.check_password_hash(user.password, password):
-        return error_message("Wrong password", 401)
+    if not user or not bcrypt.check_password_hash(user.password, password):
+        return error_message("Wrong username or password", 401)
 
     # Identity can be any data that is json serializable
     access_token = create_access_token(identity=username)
