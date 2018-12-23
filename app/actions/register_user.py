@@ -1,7 +1,7 @@
 from app.response import error_message, json_response
-from flask_jwt_extended import create_access_token
 from app.models import User, Role
 from app import db, bcrypt
+from app.jwt_tokens_manager.create_tokens import create_tokens
 
 
 def register_user(username: str, email: str, password):
@@ -22,6 +22,6 @@ def register_user(username: str, email: str, password):
     db.session.add(new_user)
     db.session.commit()
 
-    # Identity can be any data that is json serializable
-    access_token = create_access_token(identity=username)
-    return json_response({'access_token': access_token}, 201)
+    tokens = create_tokens(identity=username)
+
+    return json_response(tokens, 201)

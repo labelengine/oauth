@@ -1,7 +1,7 @@
 from app.response import error_message, json_response
-from flask_jwt_extended import create_access_token
 from app.models import User
 from app import bcrypt
+from app.jwt_tokens_manager.create_tokens import create_tokens
 
 
 def login_user(username: str, password: str):
@@ -14,6 +14,6 @@ def login_user(username: str, password: str):
     if not user or not bcrypt.check_password_hash(user.password, password):
         return error_message("Wrong username or password", 401)
 
-    # Identity can be any data that is json serializable
-    access_token = create_access_token(identity=username)
-    return json_response({'access_token': access_token})
+    tokens = create_tokens(identity=username)
+
+    return json_response(tokens)

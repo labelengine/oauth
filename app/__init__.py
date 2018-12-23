@@ -7,7 +7,11 @@ from flask_bcrypt import Bcrypt
 app = Flask(__name__)
 
 # Setup the Flask-JWT-Extended extension
+# FIXME: Move options to config
 app.config['JWT_SECRET_KEY'] = 'koryun-khachatryan'  # Change this!
+app.config['JWT_BLACKLIST_ENABLED'] = True
+app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
+app.config['JWT_ERROR_MESSAGE_KEY'] = 'message'
 jwt = JWTManager(app)
 
 # TODO: set as env variables
