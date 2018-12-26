@@ -9,14 +9,13 @@ def _epoch_utc_to_datetime(epoch_utc):
     return datetime.fromtimestamp(epoch_utc)
 
 
-def add_token_to_database(encoded_token, identity_claim):
+def add_token_to_database(decoded_token, identity_claim):
     """
     Adds a new token to the database. It is not revoked when it is added.
-    :param encoded_token:
+    :param decoded_token:
     :param identity_claim:
     :return:
     """
-    decoded_token = decode_token(encoded_token)
     jti = decoded_token['jti']
     token_type = decoded_token['type']
     user_identity = decoded_token[identity_claim]

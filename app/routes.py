@@ -1,6 +1,6 @@
 from app import app, jwt
 from flask import request
-from flask_jwt_extended import jwt_required, jwt_refresh_token_required
+from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_raw_jwt
 from app.actions.register_user import register_user
 from app.actions.login_user import login_user
 from app.actions.logout_user import logout_user
@@ -40,4 +40,10 @@ def refresh():
 @app.route('/logout', methods=['DELETE'])
 @jwt_required
 def logout():
-    return logout_user()
+    return logout_user(get_raw_jwt())
+
+
+@app.route('/logout2', methods=['DELETE'])
+@jwt_refresh_token_required
+def logout():
+    return logout_user(get_raw_jwt())
