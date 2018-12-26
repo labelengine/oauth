@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask_jwt_extended import decode_token
+from sqlalchemy.orm.exc import NoResultFound
 
 from app.models import TokenBlacklist
 from app import db
@@ -41,5 +41,8 @@ def is_token_revoked(decoded_token):
     :return:
     """
     jti = decoded_token['jti']
-    token = TokenBlacklist.query.filter_by(jti=jti).one()
-    return True if token else False
+    try:
+        token = TokenBlacklist.query.filter_by(jti=jti).one()
+        return True
+    except NoResultFound:
+        return False

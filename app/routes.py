@@ -45,5 +45,5 @@ def logout():
 
 @app.route('/logout2', methods=['DELETE'])
 @jwt_refresh_token_required
-def logout():
+def logout2():
     return logout_user(get_raw_jwt())
