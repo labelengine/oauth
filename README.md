@@ -13,5 +13,5 @@ _To init db:_
     * `flask db upgrade`
    
 _To run flask application:_
-1) Set the main point of the application. Windows: `set FLAKS_APP=auth.py` Linux: `export FLASK_APP=auth.py`
+1) Set the main point of the application. Windows: `set FLAKS_APP=oauth.py` Linux: `export FLASK_APP=oauth.py`
 2) Launch the flask by the following command: `flask run`
