@@ -11,7 +11,7 @@ def _epoch_utc_to_datetime(epoch_utc):
 
 def add_token_to_database(decoded_token, identity_claim):
     """
-    Adds a new token to the database. It is not revoked when it is added.
+    Adds a decoded token to the database.
     :param decoded_token:
     :param identity_claim:
     :return:
@@ -34,7 +34,7 @@ def add_token_to_database(decoded_token, identity_claim):
 def is_token_revoked(decoded_token):
     """
      Checks if the given token is revoked or not. Because we are adding all the
-    tokens that we create into this database, if the token is not present
+    tokens that we create into this database, when user completes logout request, if the token is not present
     in the database we are going to consider it revoked, as we don't know where
     it was created.
     :param decoded_token:
@@ -42,7 +42,7 @@ def is_token_revoked(decoded_token):
     """
     jti = decoded_token['jti']
     try:
-        token = TokenBlacklist.query.filter_by(jti=jti).one()
+        TokenBlacklist.query.filter_by(jti=jti).one()
         return True
     except NoResultFound:
         return False
