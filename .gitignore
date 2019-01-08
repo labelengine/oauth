@@ -116,3 +116,5 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+/migrations
