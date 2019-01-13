@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+
+  identities_db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: identities
+
+  oauth:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - identities_db
+    links:
+      - identities_db
