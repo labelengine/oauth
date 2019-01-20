@@ -1,12 +1,24 @@
 version: '3.1'
-services:
 
+services:
   identities_db:
     image: postgres:11-alpine
+    volumes:
+      - $HOME/docker/volumes/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: identities
+
+  identities_db_client:
+    image:  dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@labengine.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 80:80
+    depends_on:
+      - identities_db
 
   oauth:
     build:
@@ -15,6 +27,4 @@ services:
     ports:
       - 5000:5000
     depends_on:
-      - identities_db
-    links:
       - identities_db
