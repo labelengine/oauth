@@ -40,6 +40,12 @@ jobs:
       testRunTitle: 'Python $(python.version)'
     condition: succeededOrFailed()
 
+- job: 'Build docker image'
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  steps:
+    - script: docker build -t oauth -f docker/Dockerfile.
+
 # - job: 'Publish'
 #   dependsOn: 'Test'
 #   pool:
