@@ -3,8 +3,7 @@ FROM python:3.7-alpine
 RUN apk update && apk --no-cache add libffi-dev \
                                      bash \
                                      build-base \
-                                     postgresql-dev \
-                                     python3-dev
+                                     postgresql-dev
 
 WORKDIR root/
 
