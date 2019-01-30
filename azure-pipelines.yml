@@ -40,7 +40,7 @@ jobs:
       testRunTitle: 'Python $(python.version)'
     condition: succeededOrFailed()
 
-- job: 'Build docker image'
+- job: 'Build_docker_image'
   pool:
     vmImage: 'Ubuntu-16.04'
   steps:
