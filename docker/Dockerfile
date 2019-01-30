@@ -8,7 +8,7 @@ RUN apk update && apk --no-cache add libffi-dev \
 WORKDIR root/
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install -U pip==18.1 pip install --no-cache-dir -r requirements.txt
 
 COPY app/ app/
 COPY oauth.py .
