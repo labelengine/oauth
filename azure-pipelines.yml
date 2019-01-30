@@ -44,7 +44,7 @@ jobs:
   pool:
     vmImage: 'Ubuntu-16.04'
   steps:
-    - script: docker build -t oauth -f docker/Dockerfile.
+    - script: docker build -t oauth -f docker/Dockerfile .
 
 # - job: 'Publish'
 #   dependsOn: 'Test'
